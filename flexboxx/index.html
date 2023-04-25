@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+    <!-- <div>
+        <button href="" class="btn btn--size-s btn--success ">Go to next approval</button>
+        <button href="" class="btn btn--size-s btn--wran ">Ok</button>
+        <button href="" class="btn btn--size-s btn--error ">Try Again</button>
+    </div>
+    <div>
+        <button href="" class="btn btn--success ">Go to next approval</button>
+        <button href="" class="btn btn--wran btn--disabled ">Ok</button>
+        <button href="" class="btn btn--error ">Try Again</button>
+    </div>
+    <div>
+        <button href="" class="btn btn--size-l btn--success ">Go to next approval</button>
+        <button href="" class="btn btn--size-l btn--wran ">Ok</button>
+        <button href="" class="btn btn--size-l btn--error ">Try Again</button>
+    </div> -->
+
+    <!-- message -->
+
+    <!-- success -->
+    <div id="toast">
+    <!-- <div class="toast toast--success">
+        <div class="toast__icon">
+        <i class="fa-sharp fa-solid fa-circle-check"></i>
+        </div>
+        <div class="toast__body-message">
+            <h3 class="toast__title">SUCCESS</h3>
+            <p class="toast__msg">Relive a life, definitely turn back, reverse the universe, kill all traitors!
+            </p>
+        </div>
+        <div class="toast__close">
+        <i class="fa-sharp fa-solid fa-xmark"></i>
+        </div>
+    </div> -->
+    </div>
+    <div onclick="showSuccessToast()" class="btn btn--success">Show success toast</div>
+    <div onclick="showErrorToast()" class="btn btn--error">Show error toast</div>
+
+    <script>
+        // Toast function
+        function toast ({
+            title = '',
+            message = '',
+            type = 'info',
+            duration = 3000
+        }) {
+           const main = document.getElementById('toast');
+          
+           if(main) {
+            
+            const toast = document.createElement('div');
+            // auto remove toast
+            const autoRemoveID =     setTimeout(function (){
+                main.removeChild(toast)
+            },duration + 1000)
+            //remove toast when clicked(clear thanh thông báo)
+            toast.onclick = function(event) {
+               if(event.target.closest('.toast__close')){
+               //closest => tìm class của chính nó
+               //target=> click vào chính nó
+               main.removeChild(toast);
+                clearTimeout(autoRemoveID);
+               }
+            }
+            // 
+            const icons = {
+                success: 'fas fa-circle-check',
+                info: 'fas fa-sharp fa-solid fa-circle-info',
+                warning: 'fas fa-exclamation-circle',
+                error: 'fas fa-exclamation-circle',
+           };
+            const icon = icons[type];
+            const delay = (duration / 1000).toFixed(2);
+            
+            toast.classList.add('toast',`toast--${type}`);
+            toast.style.animation = `slideInleft ease 0.3s,fadeOut linear 1s ${delay}s forwards`;
+
+            toast.innerHTML =`
+            <div class="toast__icon">
+        <i class="${icon}"></i>
+        </div>
+        <div class="toast__body-message">
+            <h3 class="toast__title">${title}</h3>
+            <p class="toast__msg">${message}</p>
+        </div>
+        <div class="toast__close">
+        <i class="fa-sharp fa-solid fa-xmark"></i>
+        </div>
+        `;
+        main.appendChild(toast);
+
+           }
+        }
+       
+
+        function showSuccessToast (){
+            toast ({
+            title : 'Thành Công ',
+            message : 'RELIVE A LIFE, DEFINITELY TURN BACK, REVERSE THE UNIVERSE, KILL ALL TRAITORS!',
+            type : 'success',
+            duration : 1000
+        });
+        }
+        function showErrorToast(){
+            toast ({
+            title : 'Thất bại ',
+            message : 'Có lỗi xảy ra vui lòng liên hệ quản trị viên!',
+            type : 'error',
+            duration : 3000
+        });
+        }   
+        </script>
+    <!-- Info -->
+    <!-- <div class="toast toast--info">
+        <div class="toast__icon">
+            <i class="fa-sharp fa-solid fa-circle-check"></i>
+        </div>
+        <div class="toast__body-message">
+            <h3 class="toast__title">Info</h3>
+            <p class="toast__msg">Rơi vào tay kẻ tồi, bông hồng lại héo ngay.</p>
+        </div>
+        <div class="toast__close">
+            <i class="fa-sharp fa-solid fa-xmark"></i>
+        </div>
+    </div> -->
+        <!-- warning-->
+        <!-- <div class="toast toast--warning">
+            <div class="toast__icon">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
+            </div>
+            <div class="toast__body-message">
+                <h3 class="toast__title">warning</h3>
+                <p class="toast__msg">Rơi vào tay kẻ tồi, bông hồng lại héo ngay.</p>
+            </div>
+            <div class="toast__close">
+                <i class="fa-sharp fa-solid fa-xmark"></i>
+            </div>
+        </div>   -->
+        <!-- error -->
+        <!-- <div class="toast toast--error">
+            <div class="toast__icon">
+             <i class="fa-sharp fa-solid fa-circle-check"></i>
+            </div>
+            <div class="toast__body-message">
+            <h3 class="toast__title">error</h3>
+            <p class="toast__msg">Rơi vào tay kẻ tồi, bông hồng lại héo ngay.</p>
+         </div>
+         <div class="toast__close">
+        <i class="fa-sharp fa-solid fa-xmark"></i>
+         </div>
+    </div> -->
+</body>
+</html> 

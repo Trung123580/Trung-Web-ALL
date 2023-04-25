@@ -1,0 +1,9 @@
+/* định nghĩa font-family  */
+@font-face {
+    font-family: Outfit;
+    src: url('./fonts/Outfit.ttf');
+}
+@font-face {
+    font-family: DMsans;
+    src: url('./fonts/DMsans.ttf');
+}
